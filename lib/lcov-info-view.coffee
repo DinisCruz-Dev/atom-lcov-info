@@ -6,7 +6,7 @@ PanelView = require './panel'
 CMD_TOGGLE = 'lcov-info:toggle'
 EVT_SWITCH = 'pane-container:active-pane-item-changed'
 
-toggled = false
+toggled = true #false
 editors = {}
 
 module.exports =
@@ -28,7 +28,7 @@ class LcovInfoView extends View
     @detach()
 
   toggle: ->
-    console.log 'LcovInfoView: Toggled to display =', toggled = not toggled
+    #console.log 'LcovInfoView: Toggled to display =', toggled = not toggled
     @updateEditor()
 
   updateEditor: (editor) ->
