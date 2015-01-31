@@ -2,12 +2,16 @@ class PanelRow extends HTMLElement
   initialize: (type, file) ->
     colTitle = @createColumn()
     colTitleIcon = document.createElement('span')
-    
+
     if type is 'directory'
       colTitleIcon.classList.add('icon', 'icon-file-directory')
       colTitleIcon.textContent = 'Project'
     else
       filePath = atom.project.relativize(file.name)
+      if (file.name.indexOf '.test' > -1)
+        filePath = 'src/' + filePath
+      else
+        filePath = 'test/' + filePath
       colTitleIcon.classList.add('icon', 'icon-file-text')
       colTitleIcon.dataset.name = filePath
       colTitleIcon.textContent = filePath
