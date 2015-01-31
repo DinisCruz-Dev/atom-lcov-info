@@ -87,11 +87,14 @@ findInfoFile = (filePath) ->
   return
 
 mapInfo = (filePath, lcovData, cb) ->
-  rel = atom.project.relativize(filePath)
+  rel      = atom.project.relativize(filePath)
+  fileName = path.basename filePath
+
   for name, fileInfo of lcovData.files
-    if name.length <= rel.length
-      if rel.substring(rel.length - name.length) is name
-        return cb(lcovData, fileInfo)
+    if name.indexOf(fileName) > -1
+      if name.length <= rel.length
+        if rel.substring(rel.length - name.length) is name
+          return cb(lcovData, fileInfo)
 
   console.log 'LcovInfoView: No coverage info found for', filePath
   return cb(lcovData)
